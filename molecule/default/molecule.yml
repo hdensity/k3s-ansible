@@ -3,6 +3,7 @@ dependency:
   name: galaxy
 driver:
   name: vagrant
+  provision: true
 platforms:
 
   - name: control1
@@ -69,6 +70,19 @@ platforms:
     interfaces:
       - network_name: private_network
         ip: 192.168.30.42
+
+  - name: node3
+    box: generic/alpine317
+    instance_raw_config_args:
+    - 'vm.provision :shell, inline: "apk add --update --no-cache python3"'
+    memory: 2048
+    cpus: 2
+    groups:
+      - k3s_cluster
+      - node
+    interfaces:
+      - network_name: private_network
+        ip: 192.168.30.43
 
 provisioner:
   name: ansible

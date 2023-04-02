@@ -19,6 +19,7 @@ Build a Kubernetes cluster using Ansible with k3s. The goal is easily install a 
 - [x] Debian (tested on version 11)
 - [x] Ubuntu (tested on version 22.04)
 - [x] Rocky (tested on version 9)
+- [x] Alpine (tested on version 3.17)
 
 on processor architecture:
 

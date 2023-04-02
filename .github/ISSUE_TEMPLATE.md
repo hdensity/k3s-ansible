@@ -33,7 +33,6 @@ Hardware:
 ```yml
 k3s_version: ""
 ansible_user: NA
-systemd_dir: ""
 
 flannel_iface: ""
 

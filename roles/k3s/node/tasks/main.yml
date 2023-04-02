@@ -1,16 +1,15 @@
 ---
 
-- name: Copy K3s service file
-  template:
-    src: "k3s.service.j2"
-    dest: "{{ systemd_dir }}/k3s-node.service"
-    owner: root
-    group: root
-    mode: 0755
+- name: Download install script
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: "{{ ansible_user_dir }}/install_k3s.sh"
+    mode: 744
 
-- name: Enable and check K3s service
-  systemd:
-    name: k3s-node
-    daemon_reload: yes
-    state: restarted
-    enabled: yes
+- name: Install k3s
+  command:
+    cmd: "./install_k3s.sh {{ extra_agent_args | default('') }}"
+  environment:
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
+    K3S_TOKEN: "{{ k3s_token }}"
+    K3S_URL: https://{{ apiserver_endpoint | ansible.utils.ipwrap }}:6443
